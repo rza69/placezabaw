@@ -67,7 +67,7 @@ public class MainFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        mDataNames = new String[]{"Plac zabaw 1", "Plac zabaw 1", "Plac zabaw 1", "Plac zabaw 1", "Plac zabaw 1","Plac zabaw 1"};
+        mDataNames = new String[]{"Plac zabaw Jasia i Małgosi", "Plac zabaw 1", "Plac zabaw Jasia i Małgosi", "Plac zabaw 1", "Plac zabaw 1","Plac zabaw 1"};
     }
 
     @Override

@@ -1,5 +1,9 @@
 package pl.placezabaw.placezabaw;
 
+import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 
 import android.support.v7.widget.RecyclerView.Adapter;
@@ -16,6 +20,7 @@ import android.widget.TextView;
 public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHolder>
 {
     private String[] Names;
+    private Context ctx;
 
     public MainListAdapter(String[] n){this.Names = n;}
     @Override
@@ -30,8 +35,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvName.setText(Names[position]);
-
-       // holder.ivImage.set
+        holder.ivImage.setImageResource(R.drawable.pl_zab);
     }
 
     @Override
