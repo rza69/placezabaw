@@ -1,9 +1,11 @@
 package pl.placezabaw.placezabaw;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -68,6 +70,25 @@ public class MainFragment extends Fragment {
         }
 
         mDataNames = new String[]{"Plac zabaw Jasia i Małgosi", "Plac zabaw 1", "Plac zabaw Jasia i Małgosi", "Plac zabaw 1", "Plac zabaw 1","Plac zabaw 1"};
+
+
+        /*AlertDialog.Builder rateDialog = new AlertDialog.Builder(getActivity());
+        rateDialog.setPositiveButton("Rate", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+               // dialog.dismiss();
+            }
+        });
+
+
+        rateDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });*/
+
+
     }
 
     @Override
@@ -82,7 +103,7 @@ public class MainFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new MainListAdapter(mDataNames);
+        mAdapter = new MainListAdapter(getActivity(),mDataNames);
         mRecyclerView.setAdapter(mAdapter);
 
         return v;
