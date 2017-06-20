@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 public class MainActivity extends FragmentActivity implements MainFragment.OnFragmentInteractionListener {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -24,10 +24,10 @@ import android.widget.TextView;
 
 public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHolder>
 {
-    private String[] Names;
+    private Playground[] Items;
     private Activity activity;
 
-    public MainListAdapter(Activity actvty, String[] n){this.Names = n; this.activity = actvty;}
+    public MainListAdapter(Activity actvty, Playground[] n){this.Items = n; this.activity = actvty;}
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -40,8 +40,9 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.tvName.setText(Names[position]);
+        holder.tvName.setText(Items[position].getName());
         holder.ivImage.setImageResource(R.drawable.pl_zab);
+        holder.tvRate.setText(Items[position].getRate()+"");
 
         holder.btnRate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +72,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
             public void onClick(View v) {
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "Polecam "+Names[position]);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Polecam "+Items[position].getName());
                 shareIntent.setType("plain/text");
                 activity.startActivity(shareIntent);
             }
@@ -80,11 +81,12 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return Names.length;
+        return Items.length;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvName;
+        public TextView tvRate;
         public ImageView ivImage;
         public ImageButton btnRate;
         public ImageButton btnShare;
@@ -93,11 +95,10 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
         {
             super(v);
             this.tvName = (TextView)v.findViewById(R.id.tvName);
+            this.tvRate = (TextView)v.findViewById(R.id.tvRate);
             this.ivImage = (ImageView)v.findViewById(R.id.ivImage);
             this.btnRate = (ImageButton)v.findViewById(R.id.btnRate);
             this.btnShare = (ImageButton)v.findViewById(R.id.btnShare);
-
-
         }
     }
 }

@@ -35,7 +35,7 @@ public class MainFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private String[] mDataNames;
+    private Playground[] mDataNames;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,25 +69,18 @@ public class MainFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        mDataNames = new String[]{"Plac zabaw Jasia i Małgosi", "Plac zabaw 1", "Plac zabaw Jasia i Małgosi", "Plac zabaw 1", "Plac zabaw 1","Plac zabaw 1"};
+        mDataNames = new Playground[]{
+                new Playground(1,"Plac zabaw Jasia i Małgosi", 66.555,66.99, 4.51),
+                new Playground(1,"Plac zabaw 1", 66.555,66.99, 4.52),
+                new Playground(1,"Plac zabaw 3", 66.555,66.99, 3.51),
+                new Playground(1,"Plac zabaw 5", 66.555,66.99, 2.51),
+                new Playground(1,"Plac zabaw inny", 66.555,66.99, 4.21),
+                new Playground(1,"Plac zabaw", 66.555,66.99, 4.1)
 
+        };
+       // mDataNames = new String[]{"Plac zabaw Jasia i Małgosi", "Plac zabaw 1", "Plac zabaw Jasia i Małgosi", "Plac zabaw 1", "Plac zabaw 1","Plac zabaw 1"};
 
-        /*AlertDialog.Builder rateDialog = new AlertDialog.Builder(getActivity());
-        rateDialog.setPositiveButton("Rate", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-               // dialog.dismiss();
-            }
-        });
-
-
-        rateDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });*/
-
+        Playground pl = new Playground(1,"Plac zabaw", 66.555,66.99, 4.51);
 
     }
 

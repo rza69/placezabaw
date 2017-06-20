@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "663262407013",
+    "firebase_url": "https://startingproject-eef22.firebaseio.com",
+    "project_id": "startingproject-eef22",
+    "storage_bucket": "startingproject-eef22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663262407013:android:683b58287454ac7e",
+        "android_client_info": {
+          "package_name": "pl.mmierzynski.startingproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663262407013-i9j35980ktar4734c2snktbbijgt87oo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.mmierzynski.startingproject",
+            "certificate_hash": "ff71c1d616885b8e440399f0fb16f0828c5e0e8f"
+          }
+        },
+        {
+          "client_id": "663262407013-ilpgrtut7p95hquiseth5pig7001tier.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChKR4cF53PWrzQGc5FXx9XZK7zdVOyhEE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663262407013-ilpgrtut7p95hquiseth5pig7001tier.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663262407013:android:0dbe43c83a514de2",
+        "android_client_info": {
+          "package_name": "pl.placezabaw.placezabaw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663262407013-c7gnlgee8q6s1k3bm9hohjpdmglsgvt7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pl.placezabaw.placezabaw",
+            "certificate_hash": "ff71c1d616885b8e440399f0fb16f0828c5e0e8f"
+          }
+        },
+        {
+          "client_id": "663262407013-ilpgrtut7p95hquiseth5pig7001tier.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChKR4cF53PWrzQGc5FXx9XZK7zdVOyhEE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663262407013-ilpgrtut7p95hquiseth5pig7001tier.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
