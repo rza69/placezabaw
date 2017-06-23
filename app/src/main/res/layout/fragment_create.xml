@@ -1,0 +1,56 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="65dp"
+    android:orientation="vertical"
+    tools:context="pl.placezabaw.placezabaw.CreateFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:text="Nazwa Placu Zabaw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:text=""
+        android:hint="Wpisz tekst"
+        android:id="@+id/etAddName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stepSize="1.0"
+        android:numStars="5"
+        android:id="@+id/rbAddRatiing"
+        android:layout_gravity="center_horizontal"/>
+
+    <LinearLayout
+
+        android:layout_gravity="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Dodaj Zdjęcie"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/btnAddPic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_add_black_24dp"
+            android:background="@android:color/transparent"
+            android:layout_marginRight="12dp"/>
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/ivAddPic"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"/>
+
+</LinearLayout>

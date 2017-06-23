@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +19,18 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by Mateusz on 2017-04-29.
  */
 
 public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHolder>
 {
-    private Playground[] Items;
+    private ArrayList<Playground> Items;
     private Activity activity;
 
-    public MainListAdapter(Activity actvty, Playground[] n){this.Items = n; this.activity = actvty;}
+    public MainListAdapter(Activity actvty, ArrayList<Playground> n){this.Items = n; this.activity = actvty;}
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -40,9 +43,16 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.tvName.setText(Items[position].getName());
+        holder.tvName.setText(Items.get(position).getName());
         holder.ivImage.setImageResource(R.drawable.pl_zab);
-        holder.tvRate.setText(Items[position].getRate()+"");
+        float rate =0;
+        if(Items.get(position).getRate()!=null)
+        {
+            rate = Items.get(position).getRate().getRateSum()/Items.get(position).getRate().getCount();
+        }
+        //Items.get(position).getRate().getRateSum()+"");
+       // Log.i("data: ",Items.get(position).getRate().getCount()+"");
+        holder.tvRate.setText(rate+"");
 
         holder.btnRate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +82,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
             public void onClick(View v) {
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "Polecam "+Items[position].getName());
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Polecam "+Items.get(position).getName());
                 shareIntent.setType("plain/text");
                 activity.startActivity(shareIntent);
             }
@@ -81,7 +91,7 @@ public class MainListAdapter extends RecyclerView.Adapter<MainListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return Items.length;
+        return Items.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

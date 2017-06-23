@@ -3,14 +3,30 @@ package pl.placezabaw.placezabaw;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -35,7 +51,13 @@ public class MainFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private Playground[] mDataNames;
+    private ArrayList<Playground> mData;
+
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+
+    Playground playground;
+    String s;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,23 +86,71 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        mDataNames = new Playground[]{
-                new Playground(1,"Plac zabaw Jasia i Małgosi", 66.555,66.99, 4.51),
-                new Playground(1,"Plac zabaw 1", 66.555,66.99, 4.52),
-                new Playground(1,"Plac zabaw 3", 66.555,66.99, 3.51),
-                new Playground(1,"Plac zabaw 5", 66.555,66.99, 2.51),
-                new Playground(1,"Plac zabaw inny", 66.555,66.99, 4.21),
-                new Playground(1,"Plac zabaw", 66.555,66.99, 4.1)
+        mData = new ArrayList<Playground>();
+        database  = FirebaseDatabase.getInstance();
+        myRef = database.getReference("placezabaw");
+        //Log.i("data", myRef.push().getKey());
 
+
+        ChildEventListener mChildEventListaner = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                Playground pl = dataSnapshot.getValue(Playground.class);
+                Log.i("data","-------------------------------------------");
+                Log.i("data","--Name:"+pl.getName());
+                Log.i("data","--RateCount:"+pl.getRate().getCount());
+                Log.i("data","--RateSum:"+pl.getRate().getRateSum());
+
+                mData.add(pl);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                mData.add(dataSnapshot.getValue(Playground.class));
+                Log.i("dataChanged:",dataSnapshot.getValue(Playground.class).getName());
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                mData.add(dataSnapshot.getValue(Playground.class));
+                Log.i("dataDel:",dataSnapshot.getValue(Playground.class).getName());
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                mData.add(dataSnapshot.getValue(Playground.class));
+                Log.i("dataMov:",dataSnapshot.getValue(Playground.class).getName());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
         };
-       // mDataNames = new String[]{"Plac zabaw Jasia i Małgosi", "Plac zabaw 1", "Plac zabaw Jasia i Małgosi", "Plac zabaw 1", "Plac zabaw 1","Plac zabaw 1"};
 
-        Playground pl = new Playground(1,"Plac zabaw", 66.555,66.99, 4.51);
+        myRef.addChildEventListener(mChildEventListaner);
+
+        ValueEventListener mValueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Playground pl = dataSnapshot.getValue(Playground.class);
+                mData.add(pl);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        myRef.addValueEventListener(mValueEventListener);
 
     }
 
@@ -88,7 +158,11 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
+
         View v = inflater.inflate(R.layout.fragment_main, container, false);
+
 
         mRecyclerView = (RecyclerView)v.findViewById(R.id.rvList);
         mRecyclerView.setHasFixedSize(true);
@@ -96,7 +170,8 @@ public class MainFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new MainListAdapter(getActivity(),mDataNames);
+        mAdapter = new MainListAdapter(getActivity(),mData);
+        mAdapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(mAdapter);
 
         return v;
@@ -126,7 +201,42 @@ public class MainFragment extends Fragment {
         mListener = null;
     }
 
-    /**
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu, menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add:
+                // User chose the "Settings" item, show the app settings UI...
+
+              //  createFragment.setArguments(getIntent().getExtras());
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container_main,new CreateFragment())
+                        .addToBackStack(null)
+                        .commit();
+
+
+
+                return true;
+            case R.id.action_confirm:
+                // User chose the "Settings" item, show the app settings UI...
+
+                return false;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+       /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
@@ -140,4 +250,6 @@ public class MainFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }

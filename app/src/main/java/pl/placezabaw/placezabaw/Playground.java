@@ -1,45 +1,45 @@
 package pl.placezabaw.placezabaw;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by Mateusz on 2017-05-27.
  */
 
 public class Playground
 {
-    private int ID;
+    private String ID;
     private String Name;
-    private String ImgSrc;
-    private double Rate;
+    //private Bitmap Image;
+    private Rate Rate;
     private double Lat;
     private double Lng;
-
 
     public Playground() {
     }
 
-    public Playground(int ID, String name, double lat, double lng,  double rate) {
-        this.ID = ID;
+    public Playground(String ID, String name, double lat, double lng,  Rate rate) {
         Lat = lat;
         Lng = lng;
         Name = name;
         Rate = rate;
     }
 
-    public int getID() {
+    /*public String getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
-    public String getImgSrc() {
-        return ImgSrc;
+    public Bitmap getImage() {
+        return Image;
     }
 
-    public void setImgSrc(String imgSrc) {
-        ImgSrc = imgSrc;
-    }
+    public void setImage(Bitmap image) {
+        Image = image;
+    }*/
 
     public double getLat() {
         return Lat;
@@ -65,11 +65,11 @@ public class Playground
         Name = name;
     }
 
-    public double getRate() {
+    public pl.placezabaw.placezabaw.Rate getRate() {
         return Rate;
     }
 
-    public void setRate(double rate) {
+    public void setRate(pl.placezabaw.placezabaw.Rate rate) {
         Rate = rate;
     }
 }
